@@ -687,7 +687,7 @@ HttpStatusAccessory.prototype = {
     },
 
     setVolumeLevel: function(volumeLevel, callback, context) {
-        var TV_Adjusted_volumeLevel = Math.round(volumeLevel / 4);
+        var TV_Adjusted_volumeLevel = Math.round(volumeLevel / 100 * 60);
         var url = this.audio_url;
         var body = JSON.stringify({"current": TV_Adjusted_volumeLevel});
         var that = this;
@@ -787,7 +787,7 @@ HttpStatusAccessory.prototype = {
                     try {
 						responseBodyParsed = JSON.parse(responseBody);
 						if (responseBodyParsed) {
-							tResp = Math.round(4 * responseBodyParsed.current);
+							tResp = Math.round(responseBodyParsed.current / 60 * 100);
 							that.log.debug('%s - got answer %s', fctname, tResp);
 						} else {
 		                    that.log("%s - Could not parse message: '%s', not updating level", fctname, responseBody);
@@ -979,7 +979,7 @@ HttpStatusAccessory.prototype = {
 
             return [informationService, this.switchService, this.volumeService, this.NextInputService, this.PreviousInputService, this.ambilightService];
         } else {
-            return [informationService, this.switchService, this.NextInputService, this.PreviousInputService, this.volumeService];
+            return [informationService, this.switchService, this.volumeService];
         }
     }
 };
