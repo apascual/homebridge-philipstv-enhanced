@@ -72,7 +72,7 @@ function HttpStatusAccessory(log, config) {
         "powerstate": "On"
     });
     this.power_off_body = JSON.stringify({
-        "powerstate": "Standby"
+        "key": "Standby"
     });
 
     // Volume
@@ -297,7 +297,7 @@ HttpStatusAccessory.prototype = {
     },
 
     setPowerState: function(powerState, callback, context) {
-        var url = this.power_url;
+        var url = this.input_url;
         var body;
         var that = this;
 
